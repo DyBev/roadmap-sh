@@ -44,3 +44,37 @@ func randomFormat() string {
 
 	return formats[rand.Intn(len(formats))]
 }
+
+/*
+	A map in GO is the equivalent of a Dictionary in JS
+
+	you define the type of the indexing value in the [] and then that is followed by the type you expect to be stored
+
+	eg. map[string]string or map[string]int
+
+
+	From the GO LSP doc
+	- The make built-in function allocates and initializes an object of type 
+		slice, map, or chan (only). Like new, the first argument is a type, not a
+		value. Unlike new, make's return type is the same as the type of its
+		argument, not a pointer to it.
+
+	When allocating a map you can specify a size to allocate the memory to eg
+	`make(map[string]int, 3)`
+	will create a map of size 3
+
+*/
+
+func Hellos(names []string) (map[string]string, error) {
+	messages := make(map[string]string)
+
+	for _, name := range names {
+		message, err := Hello(name);
+		if err != nil {
+			return nil, err;
+		}
+		messages[name] = message;
+	}
+
+	return messages, nil
+}
